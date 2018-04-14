@@ -1,7 +1,7 @@
 """
 Routes and views for the flask application.
 """
-
+import os
 from datetime import datetime
 import flask as fl
 from BlueTeamParty import app, darksky, model
@@ -42,6 +42,5 @@ def power_prediction():
     id = req_dict['id']
     curr_state = req_dict['current_state']
 
-    dataModel.power_prediction_model(id)
-
+    ret = dataModel.power_prediction_model(id, curr_state)
     return fl.jsonify(ret)
