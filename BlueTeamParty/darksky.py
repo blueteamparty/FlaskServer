@@ -6,8 +6,10 @@ class Darksky:
     forecast_type = ['currently', 'minutely', 'hourly', 'daily']
 
     @staticmethod
-    def forecast(lat, lon, forecast_type = None):
+    def forecast(lat, lon, forecast_type = None, exclude = None):
         req_str =  'https://api.darksky.net/forecast/{0}/{1},{2}'.format(Darksky.api_key, str(lat), str(lon))
+        if exclude is not None:
+            req_str = req_str + "?" + ",".join
         print(req_str)
         resp = requests.get(req_str)
 
