@@ -1,12 +1,18 @@
 import requests
 import json
 
-class darksky:
-    api_key = 'xxxxxxxxxxxxxxxx'
+class Darksky:
+    api_key = 'xxxxxxxxxxxxxxxxxxxxxx'
     forecast_type = ['currently', 'minutely', 'hourly', 'daily']
 
+    @staticmethod
     def forecast(lat, lon, forecast_type = None):
-        pass
+        req_str =  'https://api.darksky.net/forecast/{0}/{1},{2}'.format(Darksky.api_key, str(lat), str(lon))
+        print(req_str)
+        resp = requests.get(req_str)
 
+        return resp.json()
+
+    @staticmethod
     def time_machine(lat, lon, time):
         pass
