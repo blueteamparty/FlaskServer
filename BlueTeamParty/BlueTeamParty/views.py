@@ -11,7 +11,8 @@ import json
 @app.route('/')
 @app.route('/home')
 def home():
-    return "Home"
+    return render_template('index.html', title="Test Title")
 
 def api_model_house():
     pass
+
