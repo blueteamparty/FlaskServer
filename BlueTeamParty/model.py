@@ -17,6 +17,13 @@ class Model:
 
     def get_id_lat_lon(self, id):
         return self.ids[id]
+
+    def ids_as_json(self):
+        ret = []
+        for key in self.ids:
+            temp = [key, str(self.ids[key][0]), str(self.ids[key][1])]
+            ret.append(temp)
+        return ret
         
     def power_prediction_model(self, id, curr_state):
         latLon = self.get_id_lat_lon(id)
@@ -26,15 +33,13 @@ class Model:
         params = list(map((lambda x: (datetime.datetime.fromtimestamp(int(x['time'])), x['temperature'], x['cloudCover'])), darkskyJson['hourly']['data']))
         print(params)
 
-        ret = {}
+        ret = []
         i = 1
         for param in params:
             ts = param[0].isoformat().replace('T', ' ')
-            ret[ts] = {}
-            ret[ts]['temperature'] = param[1]
-            ret[ts]['cloudCover'] = param[2]
-            ret[ts]['availablePower'] = random.randint(0,8)
-            ret[ts]['confidenceInterval'] = (0.99 ** i)
+                  #timestamp, temperature, cloudCover, availablePower, confidenceInterval
+            arr = [ts, param[1], param[2], random.randint(0,8), (0.99 ** i)]
+            ret.append(arr)
             i = i + 1
 
         return ret

@@ -15,9 +15,10 @@ dataModel = model.Model()
 def home():
     return fl.render_template('index.html', title="Test Title")
 
-@app.route("/demo/portfolio-points")
-def demo_portfolio_points():
-    pass
+@app.route("/api/portfolio-points", methods=['GET'])
+def portfolio_points():
+    ret = dataModel.ids_as_json()
+    return fl.jsonify(ret)
 
 @app.route("/weather", methods=['POST'])
 def get_weather():
