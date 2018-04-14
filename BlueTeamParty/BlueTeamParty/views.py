@@ -30,7 +30,7 @@ def get_weather():
 
 @app.route("/weather/current", methods=['POST'])
 def get_current_weather():
-
+    pass
 
 @app.route("/weather/historical", methods=['POST'])
 def get_weather_historical():
