@@ -27,3 +27,29 @@ def get_weather():
     ret = darksky.Darksky.forecast(float(req_dict['lat']), float(req_dict['lon']))
     print(ret)
     return fl.jsonify(ret)
+
+@app.route("/weather/current", methods=['POST'])
+def get_current_weather():
+
+
+@app.route("/weather/historical", methods=['POST'])
+def get_weather_historical():
+    req_dict = fl.request.form
+    print(req_dict)
+    ret = darksky.Darksky.time_machine(float(req_dict['lat']), float(req_dict['lon']), req_dict['time'])
+    print(ret)
+    return fl.jsonify(ret)
+
+@app.route("/api/power_prediction", methods=['POST'])
+def power_prediction():
+    req_dict = fl.request.form
+    id = req_dict['id']
+    curr_state = req_dict['current_state']
+    # get lat/lon
+
+    # call darksky
+    # prep darksky
+    # do model
+
+    ret = {}
+    return fl.jsonify(ret)
