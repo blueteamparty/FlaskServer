@@ -37,9 +37,9 @@ class Model:
         i = 1
         for param in params:
             ts = param[0].isoformat().replace('T', ' ')
-            powerInBattery = curr_state + predict_pv_power(id, param[2]) - predict_home_usage(id, param[1], hour_of_day)
+            powerInBattery = curr_state + self.predict_pv_power(id, param[2]) - self.predict_home_usage(id, param[1], param[0].hour)
             availablePower = powerInBattery - 2 # 2 kWh from a 10 kWh battery, for reserve
-#timestamp, temperature, cloudCover, availablePower, confidenceInterval, powerInBattery
+            #timestamp, temperature, cloudCover, availablePower, confidenceInterval, powerInBattery
             arr = [ts, param[1], param[2], availablePower, (0.99 ** i), powerInBattery]
             ret.append(arr)
             i = i + 1
@@ -48,8 +48,8 @@ class Model:
 
     # Take cloudcover prediction and site id, load from config site model params via site id
     # then generate power production prediction for site during hour
-    def predict_pv_power(id, cloudcover):
-        site_params = get_site_config_vars(id)
+    def predict_pv_power(self, id, cloudcover):
+        site_params = self.get_site_config_vars(id)
 
         # Stub for model using site parameters, replace this with ML regression model for PV prediction
         predicted_power = site_params[0] * site_params[1] * cloudcover
@@ -58,8 +58,8 @@ class Model:
 
     # Take temperature prediction and site id, load from config site model params via site id
     # then generate home power consumption prediction for site during hour
-    def predict_home_usage(ouput_type_id, temperature, hour_of_day):
-        site_params = get_site_config_vars(id)
+    def predict_home_usage(self, id, temperature, hour_of_day):
+        site_params = self.get_site_config_vars(id)
 
         # Stub for model using site parameters, replace this with ML regression model for home
         # power consumption, assuming households can be broken into a few basic energy demand
@@ -70,7 +70,7 @@ class Model:
 
 
     # Take site id, return model offset % for site and system size offset for site
-    def get_site_config_vars(id):
+    def get_site_config_vars(self, id):
         # Per site: (id,
         #            % offset from base model,
         #            system size multiplier for model - kW,

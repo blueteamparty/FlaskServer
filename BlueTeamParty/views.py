@@ -22,7 +22,7 @@ def portfolio_points():
 
 @app.route("/weather", methods=['POST'])
 def get_weather():
-    req_dict = fl.request.form
+    req_dict = fl.request.json
     print(req_dict)
     ret = darksky.Darksky.forecast(float(req_dict['lat']), float(req_dict['lon']))
     print(ret)
@@ -41,7 +41,7 @@ def get_weather_historical():
 def power_prediction():
     req_dict = fl.request.form
     id = req_dict['id']
-    curr_state = req_dict['current_state']
+    curr_state = int(req_dict['current_state'])
 
     ret = dataModel.power_prediction_model(id, curr_state)
     return fl.jsonify(ret)
