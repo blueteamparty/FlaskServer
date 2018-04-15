@@ -42,7 +42,7 @@ def get_weather_historical():
 def power_prediction():
     req_dict = fl.request.form
     id = req_dict['id']
-    curr_state = req_dict['current_state']
+    curr_state = int(req_dict['current_state'])
 
     ret = dataModel.power_prediction_model(id, curr_state)
     return fl.jsonify(ret)
