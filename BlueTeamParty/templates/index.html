@@ -14,29 +14,31 @@
 
 <body>
     <div>
-      <div id='map' style='width: 100%; height: 500px;'></div>
-      <form method="get">
-        <fieldset>
-          <ul>
-            <li>
-              <label for="latitude">Latitude</label>
-              <input type="text" id="latitude" placeholder="e.g. 42.91" required>
-            </li>
+      <div id='map' style='width: 100%; height: 400px;'></div>
+      <div>
+        <ul>
+          <li>
+            <label for="latitude">Latitude</label>
+            <input type="text" id="latitude" placeholder="" required>
+          </li>
 
-            <li>
-              <label for="longitude">Longitude</label>
-              <input type="text" id="longitude" placeholder="e.g. -77.78" required>
-            </li>
-          </ul>
-        </fieldset>
-
-        <button onclick="getWeatherData()">Get Weather</button>
-      </form>
+          <li>
+            <label for="longitude">Longitude</label>
+            <input type="text" id="longitude" placeholder="" required>
+          </li>
+        </ul>
+        <div class="content">
+          <textarea id="response-1" class="network-response" placeholder="error"></textarea>
+          <button onclick="getWeatherData()">Get Weather</button>
+        </div>
+      </div>
     </div>
 
 
-    <svg width="720" height="300"></svg>
-    
+    <svg width="500" height="5">
+      <div></div>
+    </svg>
+
     <script src="/static/scripts/jquery-1.10.2.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>

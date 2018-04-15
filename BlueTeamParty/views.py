@@ -23,6 +23,10 @@ def portfolio_points():
 @app.route("/weather", methods=['POST'])
 def get_weather():
     req_dict = fl.request.form
+<<<<<<< HEAD
+=======
+    force=True
+>>>>>>> 5cfcc72ef10279fe6b9247bd6044ba17980194b6
     print(req_dict)
     ret = darksky.Darksky.forecast(float(req_dict['lat']), float(req_dict['lon']))
     print(ret)

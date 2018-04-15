@@ -1,7 +1,18 @@
 import datetime
 from BlueTeamParty import darksky
+#from BlueTeamParty import solar_power_prediction_model
 import os
 import random
+import time
+
+#import numpy as np
+#import pandas as pd
+#import seaborn as sns
+#import matplotlib.pyplot as plt
+#from sklearn.model_selection import KFold
+#from sklearn.ensemble import RandomForestRegressor
+#from sklearn.decomposition import PCA
+#from sklearn.model_selection import train_test_split
 
 class Model:
 
@@ -53,6 +64,20 @@ class Model:
 
         # Stub for model using site parameters, replace this with ML regression model for PV prediction
         predicted_power = site_params[0] * site_params[1] * cloudcover
+
+        # Actual regression created model for solar PV power prediction based on dark sky cloud cover
+        #df = pd.read_csv('b9c5abaa-28bd-4c7b-9632-01ca823fb585.csv')
+        #df.shape
+        #df_2 = pd.read_csv('Georeference.csv')
+        #df_3 = pd.read_csv('One_House_2040484054.csv')
+        #df_4 = pd.read_csv('forecast.csv')
+
+        #df_test = pd.read_csv('test.csv')
+        #df_test.head()
+        #df_test['cloudCover'] = df_test['cloudCover']*100
+
+        # Normalizing time series for cloud cover and Power generation data
+        #predicted_power = df_3[df_3.index % 4 == 0]
 
         return predicted_power
 

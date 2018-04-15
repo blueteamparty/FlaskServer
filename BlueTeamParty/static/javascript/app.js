@@ -19,43 +19,6 @@ var formatData = function() {
 const dataPoints = formatData();
 console.log("dataPoints", dataPoints[4].coordinates);
 
-// mapboxgl.accessToken = 'pk.eyJ1Ijoia3NpZGRhbmEiLCJhIjoiY2pmem5ibHg4MHlvMzMzcnFkcDh5Nm9vNiJ9.hbmEp1lSFtee8vgBN97NeQ';
-// var map = new mapboxgl.Map({
-//   container: 'map',
-//   center: [-121.86, 37.7],
-//   zoom: 8,
-//   style: 'mapbox://styles/mapbox/streets-v10',
-//   layer: 'chicago-parks'
-// });
-//
-// const arr = [
-//     [-122.1, 37.39],
-//     [-121.86, 37.7]
-//   ];
-//
-// const allPoints = arr.map(point => ({
-//     type: 'Feature',
-//     geometry: {
-//         type: 'Point',
-//         coordinates: point
-//     }
-// }));
-//
-// console.log("allPoints:", allPoints);
-//
-// map.addLayer({
-//     id: 'map',
-//     type: 'Point',
-//     source: {
-//         type: 'geojson',
-//         data: {
-//             type: 'FeatureCollection',
-//             features: allPoints
-//         }
-//     }
-// });
-
-
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3NpZGRhbmEiLCJhIjoiY2pmem5ibHg4MHlvMzMzcnFkcDh5Nm9vNiJ9.hbmEp1lSFtee8vgBN97NeQ';
 var map = new mapboxgl.Map({
     container: "map",
@@ -137,13 +100,14 @@ map.on("load", function() {
 
 const latlong = { lat: 37.39, lon: -122.10 };
 
-const getWeatherData = (latlong) => {
+/*const getWeatherData = () => {
   fetch('/weather', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      contentType: 'application/json; charset=utf-8',
     },
-  }, JSON.stringify(latlong))
+    body: JSON.stringify(latlong)
+  })
   .then(response => {
     console.log("response:", response);
     // $("#response-3").text(JSON.stringify(data));
@@ -152,16 +116,19 @@ const getWeatherData = (latlong) => {
     console.log("error: ", error);
     // $("#response-3").text(JSON.stringify(error));
   })
+}*/
+
+const getWeatherData = () => {
+  $.ajax({
+    url: '/weather',
+    type: 'POST',
+    data: JSON.stringify(latlong, null, '\t'),
+    contentType: 'application/json; charset=utf-8',
+    success: function(response){
+      $("#response-1").text(JSON.stringify(response));
+    }.bind(this),
+    error: function(xhr, status, err){
+      $("#response-1").text("Error" + JSON.stringify(err));
+    }.bind(this)
+  });
 }
-// var formData = {};
-// $("form").find("input[name]").each(function (index, node) {
-//   formData[node.name] = node.value;
-// });
-//
-// const url = "/weather";
-//
-// const getWeatherData = (latlong) => {
-//   $.post(url, latlong).done(function(data) {
-//     console.log("data:", data);
-//   });
-// }
